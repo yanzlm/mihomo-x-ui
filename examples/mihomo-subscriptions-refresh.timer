@@ -1,0 +1,10 @@
+[Unit]
+Description=Check Mihomo subscription refresh schedule
+
+[Timer]
+OnBootSec=2min
+OnUnitInactiveSec=60s
+Unit=mihomo-subscriptions-refresh.service
+
+[Install]
+WantedBy=timers.target

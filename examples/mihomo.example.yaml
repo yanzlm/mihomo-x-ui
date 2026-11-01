@@ -1,0 +1,17 @@
+# Illustrative local controller/group configuration; not a full routing policy.
+# Choose your own secret before use. Keep existing rules/DNS for migration.
+mixed-port: 7897
+allow-lan: false
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:19091
+secret: CHANGE-ME-TO-A-LONG-RANDOM-SECRET
+external-ui: /var/lib/mihomo/ui
+profile:
+  store-selected: true
+proxy-groups:
+  - name: PROXY
+    type: select
+    proxies: [DIRECT]
+rules:
+  - MATCH,PROXY

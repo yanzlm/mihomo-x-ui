@@ -1,0 +1,25 @@
+[Unit]
+Description=Mihomo subscription manager
+After=network-online.target mihomo.service
+Wants=network-online.target
+
+[Service]
+EnvironmentFile=/etc/mihomo-subscriptions.env
+WorkingDirectory=/opt/mihomo-subscription-manager
+ExecStart=/opt/mihomo-subscription-manager/.venv/bin/python server.py
+Restart=on-failure
+RestartSec=3
+User=root
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+# Adjust these paths if M_CONFIG/M_HOME/M_ADMIN_DATA use other directories.
+ReadWritePaths=/etc/mihomo /var/lib/mihomo /var/lib/mihomo-subscriptions
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+CapabilityBoundingSet=CAP_CHOWN CAP_DAC_OVERRIDE CAP_FOWNER
+UMask=0077
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target

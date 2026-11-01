@@ -1,0 +1,20 @@
+# Merge these handlers into your EXISTING HTTPS virtual host.
+# Adjust the controller and manager ports if you changed their environment values.
+proxy.example.com {
+    header Referrer-Policy no-referrer
+    redir /subscriptions /subscriptions/ 308
+    handle /subscription-api/* {
+        reverse_proxy 127.0.0.1:19092
+    }
+    handle_path /subscriptions/* {
+        root * /opt/mihomo-subscription-manager/web
+        header Cache-Control no-store
+        header X-Content-Type-Options nosniff
+        header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'self'"
+        file_server
+    }
+    handle {
+        redir / /ui/ 302
+        reverse_proxy 127.0.0.1:19091
+    }
+}

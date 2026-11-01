@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>Mihomo Subscription Manager</title><link rel="stylesheet" href="./style.css"><script src="./app.js" defer></script></head>
+<body><aside><a class="brand" href="/ui/#/proxies">MIHOMO<span>[SUB]</span></a><div class="section-label">订阅管理工具</div><nav><a href="/ui/#/proxies"><span>◈</span> 节点面板</a><a class="active" href="/subscriptions/"><span>↻</span> 订阅管理</a></nav><div class="aside-foot">订阅里的节点自动加入现有分组。<br>规则和 DNS 无需重复配置。</div></aside>
+<main><header><div><div class="eyebrow">MIHOMO · SUBSCRIPTIONS</div><h1>订阅管理</h1><p>添加订阅，节点和分组自动更新。</p></div><a class="button ghost" href="/ui/#/proxies">返回节点面板 ↗</a></header>
+<section id="login" class="panel login" hidden><h2>连接你的 Mihomo</h2><p>使用节点面板相同的密钥。</p><form id="connect-form"><label for="secret">面板密钥</label><div class="inline"><input id="secret" type="password" autocomplete="off" required placeholder="输入面板密钥"><button class="primary" type="submit">连接</button></div></form></section>
+<div id="workspace" hidden><section class="stats"><div><span>订阅来源</span><strong id="source-count">—</strong></div><div><span>已导入节点</span><strong id="node-count">—</strong></div><div><span>自动更新</span><strong id="automatic-count">—</strong></div></section>
+<section class="toolbar"><div><h2>我的订阅 <span id="total-badge" class="badge">0</span></h2><p>更新失败时，继续使用上次成功的节点。</p></div><div class="actions"><button id="undo" class="ghost">撤销上次修改</button><button id="refresh-all" class="ghost">↻ 更新全部</button><button id="add" class="primary">＋ 添加订阅</button></div></section>
+<div id="sources" class="sources"></div><footer><span id="status-line">已连接</span><button id="disconnect" class="text-button">断开管理连接</button></footer></div>
+<div id="notice" role="status" aria-live="polite" hidden></div>
+</main>
+<dialog id="editor"><form id="source-form"><div class="dialog-heading"><div><div class="eyebrow">SUBSCRIPTION</div><h2 id="editor-title">添加订阅</h2></div><button class="icon-button" type="button" id="close-editor" aria-label="关闭">×</button></div><input type="hidden" id="source-id">
+<label for="source-name">订阅名称</label><input id="source-name" required maxlength="60" placeholder="例如：美国节点">
+<label for="source-url">订阅链接</label><input id="source-url" required type="url" autocomplete="off" spellcheck="false" placeholder="https://…"><p class="hint">支持 Clash/Mihomo YAML、Base64 和节点链接订阅。</p>
+<div class="form-row"><div><label for="source-interval">自动更新间隔</label><select id="source-interval"><option value="1800">每 30 分钟</option><option value="3600" selected>每小时</option><option value="21600">每 6 小时</option><option value="86400">每天</option></select></div><label class="check"><input id="source-enabled" type="checkbox" checked> 启用此订阅</label></div>
+<label class="check"><input id="source-prefix" type="checkbox" checked> 节点名称加订阅前缀</label><p class="hint">不同来源有同名节点时，前缀便于区分。</p>
+<div class="import-note">只导入节点，不覆盖现有规则和 DNS。指向当前服务器自身的节点会自动排除。</div><p id="form-error" role="alert" hidden></p><div class="dialog-actions"><button id="cancel-editor" class="ghost" type="button">取消</button><button id="save" class="primary" type="submit">导入并应用</button></div></form></dialog>
+<dialog id="confirm"><div class="dialog-heading"><h2 id="confirm-title">确认操作</h2></div><p id="confirm-copy"></p><div class="dialog-actions"><button id="confirm-cancel" class="ghost">取消</button><button id="confirm-go" class="primary">确认</button></div></dialog>
+</body></html>
