@@ -11,7 +11,7 @@
 从这里开始：[3X-UI + Mihomo 完整部署教程](docs/full-stack.md)。
 
 ```sh
-git clone https://github.com/13632675873/mihomo-x-ui.git
+git clone https://github.com/yanzlm/mihomo-x-ui.git
 cd mihomo-x-ui
 # 替换域名和真实公网 IP，先预览安装计划。
 python3 stack.py --panel-domain panel.example.com --xui-domain xui.example.com --server-ip YOUR_PUBLIC_IP
@@ -50,7 +50,7 @@ python3 stack.py --panel-domain panel.example.com --xui-domain xui.example.com -
 ### 1. 获取代码与依赖
 
 ```sh
-git clone https://github.com/13632675873/mihomo-x-ui.git
+git clone https://github.com/yanzlm/mihomo-x-ui.git
 sudo cp -a mihomo-x-ui /opt/mihomo-subscription-manager
 sudo chown -R root:root /opt/mihomo-subscription-manager
 cd /opt/mihomo-subscription-manager

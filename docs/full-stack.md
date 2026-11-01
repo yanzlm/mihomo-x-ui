@@ -48,7 +48,7 @@ apt-get install -y git python3 ca-certificates
 ## 3. 同一个仓库完成组合安装
 
 ```sh
-git clone https://github.com/13632675873/mihomo-x-ui.git
+git clone https://github.com/yanzlm/mihomo-x-ui.git
 cd mihomo-x-ui
 
 # 先预览，不写配置、不安装软件；替换域名和真实公网 IP。
