@@ -15,3 +15,5 @@ managed-subscriptions/
 *.tar.gz
 *.zip
 artifacts/
+credentials*.json
+install-result.env

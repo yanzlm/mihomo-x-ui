@@ -1,10 +1,26 @@
-# Mihomo Subscription Manager
+# mihomo-x-ui
 
-给自托管 Mihomo 增加网页订阅管理：粘贴订阅链接，自动导入节点并加入现有策略组，无需反复编写 YAML。
+在一个项目中部署 **3X-UI + Mihomo + MetaCubeXD + 网页订阅管理**，并提供 REALITY 入站到订阅出口的完整配置步骤。
 
-**首个公开版本 · MIT · Python 3.11+ · 原生网页，无前端构建步骤**
+**MIT · Debian 12/13 新机组合安装 · Python 3.11+ · 原生订阅管理网页**
 
-这是独立的订阅管理扩展，可与 MetaCubeXD 同源部署；不是 MetaCubeX 官方项目，不打包 Mihomo、MetaCubeXD 或 Caddy。
+这是独立项目，不是 3X-UI 或 MetaCubeX 的官方产品。安装时从官方渠道获取上游软件，本仓库不打包其二进制。
+
+## 新 VPS：部署完整组合
+
+从这里开始：[3X-UI + Mihomo 完整部署教程](docs/full-stack.md)。
+
+```sh
+git clone https://github.com/13632675873/mihomo-x-ui.git
+cd mihomo-x-ui
+# 替换域名和真实公网 IP，先预览安装计划。
+python3 stack.py --panel-domain panel.example.com --xui-domain xui.example.com --server-ip YOUR_PUBLIC_IP
+# 新 Debian VPS 上以 root 执行同一命令并增加 --apply，才会安装。
+```
+
+安装器提供固定版本下载与 SHA-256 校验、3X-UI 和订阅服务的本机监听、Mihomo 与两个网页面板、Caddy HTTPS、systemd 与订阅更新定时器。完成安装后按教程创建 REALITY 入站、添加 Xray → Mihomo 转发、导入订阅并选节点。默认网页使用 443，REALITY 使用 24443，避免端口冲突。
+
+已有节点请使用下面的扩展安装方式；`stack.py --apply` 会拒绝覆盖旧配置。组合安装入口仍需在具体新 VPS 验证，不把服务启动当作代理链路已完成。
 
 ## 功能
 
@@ -18,24 +34,25 @@
 
 访问：`https://你的面板域名/subscriptions/`。使用原 Mihomo Secret 登录；在同源 MetaCubeXD 已连接的浏览器里会尝试复用已保存的连接资料。
 
-## 部署前提
+## 订阅管理扩展的部署前提
 
 准备一台已有 **Mihomo 及可用配置** 的 Linux VPS（systemd 示例以 Debian/Ubuntu 为主），以及 curl、Python 3.11+、PyYAML、同源 HTTPS 反向代理。核心控制 API 必须只监听 loopback，并有非空 Secret。
 
-本项目是已有核心的扩展，**不是空白 VPS 全套代理服务器一键安装器**。它不创建 Xray 入站、不提供节点、不分配出口，也不自动重写你的国内/海外分流策略。先按上游文档安装并测试核心：
+下面这条路径只给**已有核心**增加订阅管理，不安装或覆盖现有 3X-UI，不提供节点或购买上游出口。新机需要完整组合时使用上面的教程。单独准备核心可参考：
 
 - [Mihomo 配置文档](https://wiki.metacubex.one/config/)
 - [代理集合](https://wiki.metacubex.one/config/proxy-providers/)
 - [MetaCubeXD](https://github.com/MetaCubeX/metacubexd)
 - [Caddy](https://caddyserver.com/docs/)
 
-## 安装
+## 已有 Mihomo：安装订阅管理扩展
 
 ### 1. 获取代码与依赖
 
 ```sh
 git clone https://github.com/13632675873/mihomo-x-ui.git
 sudo cp -a mihomo-x-ui /opt/mihomo-subscription-manager
+sudo chown -R root:root /opt/mihomo-subscription-manager
 cd /opt/mihomo-subscription-manager
 sudo python3 -m venv .venv
 sudo .venv/bin/python -m pip install -r requirements.txt
@@ -114,7 +131,7 @@ sudo python3 integrate_dashboard.py --ui-dir /var/lib/mihomo/ui
 
 见 [配置与迁移](docs/deployment.md) 和 [安全说明](SECURITY.md)。源码仓库不包含你的私有订阅、节点缓存、密钥、证书或服务端入站，不能代替灾备。
 
-当前公开版已在本地运行自动测试；原型曾完成单台 Linux VPS 的上线验证。公开版的参数化部署仍需在你的系统上检查，不承诺覆盖所有发行版、Mihomo 版本和仪表盘版本。没有 TUN/DNS 防泄漏或出口路由的独立端到端保证。
+订阅管理原型曾完成单台 Linux VPS 的上线验证；公开版有自动测试和固定上游组件的兼容检查。组合安装需要在你的域名、网络和 VPS 上完成验收，不承诺覆盖所有发行版、核心和仪表盘版本。没有 TUN/DNS 防泄漏或出口路由的独立端到端保证。
 
 ## 开发与许可证
 
@@ -131,4 +148,4 @@ node --check web/integration.js
 
 ---
 
-**English:** A small self-hosted subscription-management extension for an existing Mihomo core. Import subscriptions from a web page while retaining existing rules and DNS. Includes per-source scheduled refresh, validation, rollback, systemd and Caddy examples. Requires Python 3.11+, curl, PyYAML and an existing local Mihomo controller with a non-empty secret. This is an independent project, not an official MetaCubeX product or a complete VPS proxy installer.
+**English:** A deployment project for 3X-UI, Mihomo, MetaCubeXD and a subscription-management web extension. Includes a fresh Debian 12/13 installer with pinned upstream downloads, HTTPS dashboards, and a guide connecting REALITY ingress to Mihomo-selected egress. Existing Mihomo users can install only the extension. Requires manual inbound creation, subscription import, egress selection and end-to-end validation. Independent project; upstream software retains its own licenses.

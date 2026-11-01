@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "checked_on": "2026-11-01",
+  "components": {
+    "3x-ui": {
+      "version": "v3.11.0",
+      "assets": {
+        "amd64": {
+          "url": "https://github.com/MHSanaei/3x-ui/releases/download/v3.11.0/x-ui-linux-amd64.tar.gz",
+          "sha256": "0ddfa4702f595442e2962acd81addc768fdacaa4ff2672c971a0463dae744916"
+        },
+        "arm64": {
+          "url": "https://github.com/MHSanaei/3x-ui/releases/download/v3.11.0/x-ui-linux-arm64.tar.gz",
+          "sha256": "f50b4c30fd919d018f2f4c3d8db53a4ca027503d581328727770afb116a79d90"
+        }
+      },
+      "menu": {
+        "url": "https://raw.githubusercontent.com/MHSanaei/3x-ui/v3.11.0/x-ui.sh",
+        "sha256": "26c229d5fb3b184e81581b4b223b801582ca7cf5908aaedeb8d1c7c70ad4cc25"
+      }
+    },
+    "mihomo": {
+      "version": "v1.19.33",
+      "assets": {
+        "amd64": {
+          "url": "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.33/mihomo-linux-amd64-compatible-v1.19.33.gz",
+          "sha256": "386508bfb1c72c43b6a0eda73708ecdce82546581b0ebcb16366c53757c622b6"
+        },
+        "arm64": {
+          "url": "https://github.com/MetaCubeX/mihomo/releases/download/v1.19.33/mihomo-linux-arm64-v1.19.33.gz",
+          "sha256": "ba408b317080ee265c46cb923a50018c1b82cbd708551cdd46a1e3e307396187"
+        }
+      }
+    },
+    "metacubexd": {
+      "version": "088c50ccd9c142f607d3ec806a123e7bfff01147",
+      "url": "https://codeload.github.com/MetaCubeX/metacubexd/zip/088c50ccd9c142f607d3ec806a123e7bfff01147",
+      "sha256": "08928ac371cd9866abbfb02ebca12a3294ebb778889a7d9b8b4d45c4568978cb"
+    }
+  }
+}
