@@ -6,9 +6,15 @@
 
 这是独立项目，不是 3X-UI 或 MetaCubeX 的官方产品。安装时从官方渠道获取上游软件，本仓库不打包其二进制。
 
+## 第一次安装？从小白版开始
+
+**[打开小白版：一步步装好 3X-UI 和 Mihomo 面板](docs/beginner.md)**
+
+按“准备资料 → 复制命令 → 打开网页 → 填写节点”的顺序操作，每一步都有填写表格和完成标志。先照着做，遇到需要了解原理的地方再看详细版。
+
 ## 新 VPS：部署完整组合
 
-从这里开始：[3X-UI + Mihomo 完整部署教程](docs/full-stack.md)。
+选择教程：[小白版，按步骤操作](docs/beginner.md) · [详细版，查看部署和检查细节](docs/full-stack.md)。
 
 ```sh
 git clone https://github.com/yanzlm/mihomo-x-ui.git
